@@ -1,4 +1,4 @@
-package site.metacoding.junitproject.web;
+package site.castleuk.junitproject.web;
 
 public class BookApiControllerTest {
   
