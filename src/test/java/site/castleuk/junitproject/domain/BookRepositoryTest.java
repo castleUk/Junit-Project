@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.util.List;
 import java.util.Optional;
-
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -77,23 +76,47 @@ public class BookRepositoryTest {
     assertEquals(title, bookPS.getTitle());
     assertEquals(author, bookPS.getAuthor());
   } // 트랜잭션 종료(저장된 데이터를 초기화함)
-  
-  
+
   //4. 책 삭제
   @Sql("classpath:db/tableInit.sql")
   @Test
-  public void 책삭제(){
+  public void 책삭제() {
     //given
     Long id = 1L;
     //when
     bookRepository.deleteById(id);
 
     //then
-    assertFalse(bookRepository.findById(id).isPresent());  
+    assertFalse(bookRepository.findById(id).isPresent());
     //false 성공, 없어야 성공
-  } 
-
+  }
 
   //5. 책 수정
+  @Sql("classpath:db/tableInit.sql")
+  @Test
+  public void 책수정_test() {
+    //given
+    Long id = 1L;
+    String title = "junit5";
+    String author = "성욱";
+    Book book = new Book(id, title, author);
 
+    //when
+    Book bookPS = bookRepository.save(book);
+
+    // bookRepository
+    //   .findAll()
+    //   .stream()
+    //   .forEach(b -> {
+    //     System.out.println(b.getId());
+    //     System.out.println(b.getTitle());
+    //     System.out.println(b.getAuthor());
+    //     System.out.println("===================");
+    // });
+
+    //then
+    assertEquals(id, bookPS.getId());
+    assertEquals(title, bookPS.getTitle());
+    assertEquals(author, bookPS.getAuthor());
+  }
 }
