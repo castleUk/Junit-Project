@@ -5,7 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,9 +24,14 @@ public class Book {
   @Column(length = 20, nullable = false)
   private String author;
 
-@Builder
+  @Builder
   public Book(Long id, String title, String author) {
     this.id = id;
+    this.title = title;
+    this.author = author;
+  }
+
+  public void update(String title, String author) {
     this.title = title;
     this.author = author;
   }
