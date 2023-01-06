@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
+import com.jayway.jsonpath.Option;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -78,7 +79,7 @@ public class BookServiceTest {
   }
 
   @Test
-  public void 책한건보기테스트() {
+  public void 책한건보기_테스트() {
     //given
     Long id = 1L;
     Book book = new Book(1L, "junit강의", "성욱");
@@ -91,5 +92,23 @@ public class BookServiceTest {
     //then
     assertThat(bookRespDto.getTitle()).isEqualTo(book.getTitle());
     assertThat(bookRespDto.getAuthor()).isEqualTo(book.getAuthor());
+  }
+
+  @Test
+  public void 책수정하기_테스트() {
+    //given
+    Long id = 1L;
+    BookSaveReqDto dto = new BookSaveReqDto();
+    dto.setTitle("spring강의");
+    dto.setAuthor("서우기");
+    //stub
+    Book book = new Book(1L, "junit강의", "성욱");
+    Optional<Book> bookOp = Optional.of(book);
+    when(bookRepository.findById(id)).thenReturn(bookOp);
+    //when
+    BookRespDto bookRespDto = bookService.책수정하기(id, dto);
+    //then
+    assertThat(bookRespDto.getTitle()).isEqualTo(dto.getTitle());
+    assertThat(bookRespDto.getAuthor()).isEqualTo(dto.getAuthor());
   }
 }
