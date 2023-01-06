@@ -28,16 +28,28 @@ public class BookService {
         throw new RuntimeException("메일이 전송되지 않았습니다");
       }
     }
-    return new BookRespDto().toDto(bookPS);
+    return bookPS.toDto();
   }
 
   // 2. 책목록보기
   public List<BookRespDto> 책목록보기() {
-    return bookRepository
+    //테스트코드 오류 -> 본코드에 문제가 있나?
+    List<BookRespDto> dtos = bookRepository
       .findAll()
       .stream()
-      .map(new BookRespDto()::toDto)
+      // .map(bookPS -> bookPS.toDto())
+      .map(Book::toDto)
       .collect(Collectors.toList());
+    //print
+    dtos
+      .stream()
+      .forEach(b -> {
+        System.out.println("===================================본코드");
+        System.out.println(b.getId());
+        System.out.println(b.getTitle());
+      });
+
+    return dtos;
   }
 
   // 3. 책한건보기
@@ -45,7 +57,8 @@ public class BookService {
     Optional<Book> bookOP = bookRepository.findById(id);
     if (bookOP.isPresent()) {
       //찾았다면
-      return new BookRespDto().toDto(bookOP.get());
+      Book bookPS = bookOP.get();
+      return bookPS.toDto();
     } else {
       throw new RuntimeException("해당 아이디를 찾을수 없습니다");
     }
