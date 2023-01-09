@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import site.castleuk.junitproject.web.dto.BookRespDto;
+import site.castleuk.junitproject.web.dto.response.BookRespDto;
 
 @NoArgsConstructor
 @Getter

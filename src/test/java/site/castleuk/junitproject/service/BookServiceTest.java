@@ -17,8 +17,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import site.castleuk.junitproject.domain.Book;
 import site.castleuk.junitproject.domain.BookRepository;
 import site.castleuk.junitproject.util.MailSender;
-import site.castleuk.junitproject.web.dto.BookRespDto;
-import site.castleuk.junitproject.web.dto.BookSaveReqDto;
+import site.castleuk.junitproject.web.dto.request.BookSaveReqDto;
+import site.castleuk.junitproject.web.dto.response.BookRespDto;
 
 @ExtendWith(MockitoExtension.class)
 public class BookServiceTest {

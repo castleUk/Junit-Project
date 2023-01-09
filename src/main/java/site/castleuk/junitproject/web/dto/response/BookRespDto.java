@@ -1,4 +1,4 @@
-package site.castleuk.junitproject.web.dto;
+package site.castleuk.junitproject.web.dto.response;
 
 import lombok.Builder;
 import lombok.Getter;
