@@ -10,6 +10,7 @@ import site.castleuk.junitproject.domain.Book;
 import site.castleuk.junitproject.domain.BookRepository;
 import site.castleuk.junitproject.util.MailSender;
 import site.castleuk.junitproject.web.dto.request.BookSaveReqDto;
+import site.castleuk.junitproject.web.dto.response.BookListRespDto;
 import site.castleuk.junitproject.web.dto.response.BookRespDto;
 
 @RequiredArgsConstructor
@@ -32,7 +33,7 @@ public class BookService {
   }
 
   // 2. 책목록보기
-  public List<BookRespDto> 책목록보기() {
+  public BookListRespDto 책목록보기() {
     //테스트코드 오류 -> 본코드에 문제가 있나?
     List<BookRespDto> dtos = bookRepository
       .findAll()
@@ -48,8 +49,12 @@ public class BookService {
         System.out.println(b.getId());
         System.out.println(b.getTitle());
       });
+    BookListRespDto bookListRespDto = BookListRespDto
+      .builder()
+      .bookList(dtos)
+      .build();
 
-    return dtos;
+    return bookListRespDto;
   }
 
   // 3. 책한건보기

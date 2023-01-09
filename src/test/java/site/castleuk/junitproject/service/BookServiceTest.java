@@ -1,14 +1,12 @@
 package site.castleuk.junitproject.service;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-import com.jayway.jsonpath.Option;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import org.assertj.core.util.Arrays;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -18,6 +16,7 @@ import site.castleuk.junitproject.domain.Book;
 import site.castleuk.junitproject.domain.BookRepository;
 import site.castleuk.junitproject.util.MailSender;
 import site.castleuk.junitproject.web.dto.request.BookSaveReqDto;
+import site.castleuk.junitproject.web.dto.response.BookListRespDto;
 import site.castleuk.junitproject.web.dto.response.BookRespDto;
 
 @ExtendWith(MockitoExtension.class)
@@ -65,17 +64,12 @@ public class BookServiceTest {
 
     when(bookRepository.findAll()).thenReturn(books);
     //when
-    List<BookRespDto> bookRespDtoList = bookService.책목록보기();
+    BookListRespDto bookListRespDto = bookService.책목록보기();
 
     //print
-    bookRespDtoList
-      .stream()
-      .forEach(b -> {
-        System.out.println(b.getId());
-        System.out.println(b.getTitle());
-      });
     //then
-    assertThat(bookRespDtoList.get(0).getTitle()).isEqualTo("junit강의");
+    assertThat(bookListRespDto.getItems().get(0).getTitle())
+      .isEqualTo("junit강의");
   }
 
   @Test
